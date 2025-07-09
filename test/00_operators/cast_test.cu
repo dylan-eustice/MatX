@@ -40,6 +40,7 @@ TEST(OperatorTests, Cast)
   // example-begin as_complex_float-test-1
   auto c32 = make_tensor<cuda::std::complex<float>>({});
   auto s64 = make_tensor<double>({});
+  cudaStreamSynchronize(0);
   s64.SetVals({5.0});
   (c32 = as_complex_float(s64)).run();
   // c32() will be (5.0f, 0.0f)
@@ -48,6 +49,7 @@ TEST(OperatorTests, Cast)
   // example-begin as_complex_double-test-1
   auto c64 = make_tensor<cuda::std::complex<double>>({});
   auto s32 = make_tensor<float>({});
+  cudaStreamSynchronize(0);
   s32.SetVals({3.0f});
   (c64 = as_complex_double(s32)).run();
   // c64() will be (3.0, 0.0)
